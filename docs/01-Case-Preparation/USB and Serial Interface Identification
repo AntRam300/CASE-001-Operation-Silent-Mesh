@@ -1,0 +1,29 @@
+### Finding F-001 — USB and Serial Interface Identification
+
+**Case ID:** CASE-001  
+**Evidence Source:** Arch Linux kernel journal  
+**Acquisition Method:** `journalctl`  
+**Status:** Verified host-side observations
+
+#### Observation 1 — USB Enumeration
+- Log line: 1059
+- Vendor ID: `303a`
+- Product ID: `1001`
+- Manufacturer: Espressif
+- Result: USB device successfully recognized by Linux.
+
+#### Observation 2 — Serial Interface
+- Log line: 1423
+- Driver: `cdc_acm`
+- Interface: `/dev/ttyACM0`
+- Result: Linux successfully registered a USB serial device.
+
+#### Investigative Assessment
+The two log entries establish successful USB enumeration and host-side serial interface registration.
+
+These findings do not independently demonstrate successful communication with Meshtastic firmware or operational LoRa transmission.
+
+#### Outstanding Questions
+- What firmware is installed on the connected hardware?
+- Why does the Meshtastic CLI time out?
+- What is the cause of the reported LoRa error?
