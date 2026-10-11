@@ -1,0 +1,26 @@
+### Lab 01 — Serial Interface Troubleshooting
+
+**Case:** CASE-001 Operation Silent Mesh  
+**Tool:** Meshtastic CLI 2.7.11  
+**Workstation:** Arch Linux  
+**Device Interface:** `/dev/ttyACM0`
+
+#### Observations
+
+The Linux workstation identified an Espressif USB JTAG/serial debug interface and assigned it to `/dev/ttyACM0`.
+
+The examiner's account was confirmed to belong to the `uucp` group. Device permissions were `crw-rw----` with ownership `root:uucp`.
+
+The `fuser` command did not identify any process holding the serial interface at the time of examination.
+
+A previous Meshtastic CLI device-information query timed out.
+
+#### Preliminary Assessment
+
+Basic device permissions appear correctly configured. The cause of the Meshtastic communication timeout remains undetermined.
+
+#### Next Investigative Action
+
+Review USB enumeration and serial driver messages. Verify the physical radio model and operating state before conducting another logical acquisition.
+
+**Status:** Troubleshooting ongoing.
