@@ -1,0 +1,68 @@
+# Lab 02 — Evidence Encryption and Integrity Verification
+
+**Case ID:** CASE-001  
+**Case Name:** Operation Silent Mesh  
+**Workstation:** Arch Linux  
+**Evidence File:** `kernal_usb_log.txt`  
+**Status:** Completed — encrypted-copy hash recheck pending
+
+## Objective
+
+Protect a collected USB kernel-log artifact using AES-256 symmetric encryption while maintaining the ability to verify its integrity after decryption.
+
+## Methodology
+
+1. Calculate the original file's SHA-256 hash.
+2. Preserve the checksum in the case notes.
+3. Verify the original file against its recorded checksum.
+4. Encrypt the file using GPG symmetric AES-256 encryption.
+5. Decrypt the encrypted artifact into a separate working directory.
+6. Compare SHA-256 hashes of the original and recovered files.
+7. Generate a separate checksum for the encrypted artifact.
+
+## Tools
+
+- GNU Privacy Guard (GPG)
+- `sha256sum`
+- Arch Linux terminal
+
+## Evidence
+
+**Original artifact:** `kernal_usb_log.txt`
+
+**Encrypted artifact:** `kernal_usb_log.txt.gpg`
+
+**Decrypted verification copy:** `kernal_usb_log_verified.txt`
+
+**Original SHA-256:**
+
+`dc30ac698e8ff3b6c86294827b6eaa3433ba031455b87d775ea0a86065d4c15f`
+
+**Decrypted SHA-256:**
+
+`dc30ac698e8ff3b6c86294827b6eaa3433ba031455b87d775ea0a86065d4c15f`
+
+## Results
+
+The initial GPG encryption attempt failed following a passphrase-agent timeout. A subsequent attempt completed successfully.
+
+GPG reported AES256.CFB encryption and successful decryption.
+
+The original file and recovered working copy produced identical SHA-256 hashes.
+
+## Investigative Assessment
+
+The matching hashes establish that the decrypted file is byte-for-byte identical to the original file at the point of hashing.
+
+The exercise demonstrates successful encrypted evidence storage and content-integrity verification. It does not independently prove the authenticity or completeness of the original acquisition.
+
+## Limitations
+
+- Original plaintext evidence remains unencrypted.
+- Encryption does not replace chain-of-custody documentation.
+- A separate checksum was generated for the encrypted artifact; its subsequent verification remains pending.
+- Hardware and firmware identity of the Meshtastic device remain under investigation.
+
+## Conclusion
+
+The AES-256 encryption and decryption workflow was successfully completed. The decrypted artifact matched the original SHA-256 reference value, demonstrating preservation of file contents through the encryption and recovery process.
